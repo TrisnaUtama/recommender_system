@@ -1,0 +1,50 @@
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+pip-wheel-metadata/
+
+node_modules/
+package-lock.json
+package.json
+yarn.lock
+
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# .env
+.env.local
+.env*.local
+.env
+.env.*
+
+**/package/  
+**/packages/ 
+**/lib/      
+**/dist/     
+**/target/   
+**/bin/     
+
+.DS_Store
+media/*
+staticfiles/*
+
+# Ignore SQLite3 files
+*.sqlite3
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3-journal
+
+# Ignore .bin directories (common for Python/Node/other tools)
+.bin/
+**/.bin/
+
+# Ignore Chroma .bin files
+chroma/**/*.bin
+chroma/.bin/
+chroma/*/.bin/
