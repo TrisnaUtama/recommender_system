@@ -9,3 +9,13 @@ services:
     volumes:
       - .:/app
     restart: unless-stopped
+    networks: 
+      - rental-network 
+    depends_on:
+      db: 
+        condition: service_healthy 
+
+networks:
+  rental-network:
+    name: rental-network 
+    external: true
