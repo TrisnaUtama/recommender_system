@@ -45,17 +45,13 @@ class CollaborativeFiltering:
         if self.model is None:
             logger.error("Model has not been fitted yet. Call .fit() before recommending.")
             return pd.DataFrame(columns=['destination_id', 'predicted_score'])
-
         rated = self.df[self.df['customer_id'] == user_id]['destination_id'].tolist()
         not_rated = [p for p in self.all_places if p not in rated]
-
         logger.debug(f"User {user_id} has rated: {rated}")
         logger.debug(f"Candidates for recommendation (not yet rated by {user_id}): {not_rated}")
-
         predictions = []
         for place in not_rated:
             try:
-                # Use model.predict's optional `r_ui` and `details` arguments for more info if needed
                 pred = self.model.predict(user_id, place)
                 logger.debug(f"Prediction for user {user_id} and place {place}: {pred.est:.2f}")
                 predictions.append((place, pred.est))
@@ -85,8 +81,8 @@ class CollaborativeFiltering:
                         logger.info(f"Model loaded successfully from {filepath} (full data).")
                     elif len(data) == 2:
                         self.model, self.trainset = data
-                        self.df = pd.DataFrame() # Initialize empty as they were not in the pickle
-                        self.all_places = []    # Initialize empty as they were not in the pickle
+                        self.df = pd.DataFrame() 
+                        self.all_places = []    
                         logger.warning(f"Model loaded successfully from {filepath} (partial data - df and all_places are empty).")
                     else:
                         raise ValueError(f"Unexpected number of objects in pickle: {len(data)}")

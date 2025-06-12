@@ -54,7 +54,6 @@ def retrain_model():
                 app_logger.info("Model retraining and reloading completed successfully in background.")
             except Exception as e:
                 app_logger.error(f"Error during background model retraining and reloading: {e}")
-    
     threading.Thread(target=background_retrain).start()
     return {"message": "Retrain and reload triggered in background. Check logs for progress."}
 
