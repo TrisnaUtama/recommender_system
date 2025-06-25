@@ -1,21 +1,29 @@
+# Lokasi: Di dalam folder proyek sistem rekomendasi Anda
+
 version: "3.9"
 
 services:
-  recommender:
+  recommender_testing:
     build: .
-    container_name: recommender_service
+    container_name: recommender_service_testing
     ports:
-      - "8888:8888"
+      - "8889:8888"
     volumes:
       - .:/app
     restart: unless-stopped
     networks: 
-      - rental-network 
-    depends_on:
-      db: 
-        condition: service_healthy 
+      # DIUBAH: Nama network disesuaikan agar sama dengan yang didefinisikan di bawah
+      # dan sama dengan network yang dibuat oleh stack Elysia.
+      - rental_testing_network 
+
+    # DIHAPUS: Blok 'depends_on' dihapus karena service 'db_testing'
+    # berada di file docker-compose yang berbeda.
+    # Anda harus menjalankan stack backend/db terlebih dahulu.
 
 networks:
-  rental-network:
-    name: rental-network 
+  # DIUBAH: Blok ini sekarang mendefinisikan network yang benar.
+  rental_testing_network:
+    # Nama network harus sama persis dengan yang ada di file docker-compose Elysia
+    name: rental_testing_network 
+    # 'external: true' berarti "jangan buat network ini, tapi gunakan yang sudah ada"
     external: true
