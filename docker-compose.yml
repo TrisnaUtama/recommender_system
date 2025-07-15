@@ -10,10 +10,7 @@ services:
       - .:/app
     restart: unless-stopped
     networks: 
-      - rental-network 
-    depends_on:
-      db: 
-        condition: service_healthy 
+      - rental-network  
 
 networks:
   rental-network:
